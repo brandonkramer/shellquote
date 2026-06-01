@@ -1,6 +1,7 @@
 package shellquote
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -14,7 +15,7 @@ func PromptPath(runDir string) string {
 func WritePrompt(runDir, content string) (string, error) {
 	path := PromptPath(runDir)
 	if err := os.WriteFile(path, []byte(content), 0o600); err != nil {
-		return "", err
+		return "", fmt.Errorf("shellquote: write prompt: %w", err)
 	}
 	return path, nil
 }
